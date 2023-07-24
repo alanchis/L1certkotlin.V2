@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "599934325815",
+    "project_id": "alanc-l1",
+    "storage_bucket": "alanc-l1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599934325815:android:f8cda74f0ca9da8b651bb2",
+        "android_client_info": {
+          "package_name": "com.example.l1cert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599934325815-4l3udakoogdqeginrdo6mdvnt4j4tblk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.l1cert",
+            "certificate_hash": "8ec840ada4ac9a0f80961175c74d341ce3f6df06"
+          }
+        },
+        {
+          "client_id": "599934325815-rcmne5klch0nt6pdg0iatns73irtcra7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAODidjZ-NcDqlEUljRkNpiJti2yfNz-Gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599934325815-rcmne5klch0nt6pdg0iatns73irtcra7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
