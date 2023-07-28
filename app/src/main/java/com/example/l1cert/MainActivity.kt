@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var emailText : EditText
     lateinit var passwordText : EditText
 
+    //yahoo
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         passwordText = findViewById(R.id.inputPassword)
 
         firebaseAuth = Firebase.auth
+
+        //yahoo
+        var provider = OAuthProvider.newBuilder("yahoo.com")
 
 //        GoogleSignin information
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -83,7 +90,13 @@ class MainActivity : AppCompatActivity() {
 
         }
         btnFacebook.setOnClickListener {
-            Toast.makeText(this, "Facebook button clicked", Toast.LENGTH_SHORT).show()
+            val provider = OAuthProvider.newBuilder("yahoo.com")
+
+            provider.addCustomParameter("prompt", "login")
+            provider.addCustomParameter("language", "en")
+            provider.scopes = listOf("mail-r", "sdct-w")
+
+            yahooImplementation()
         }
         btnPhone.setOnClickListener {
 //            Toast.makeText(this, "Phone  button clicked", Toast.LENGTH_SHORT).show()
@@ -204,6 +217,71 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this , LoggedInActivity::class.java))
 
         }
+    }
+
+
+    fun yahooImplementation(){
+
+        val provider = OAuthProvider.newBuilder("yahoo.com")
+
+//        provider.addCustomParameter("prompt", "login")
+//        provider.addCustomParameter("language", "en")
+//        provider.scopes = listOf("mail-r", "sdct-w")
+
+
+        val pendingResultTask = firebaseAuth.pendingAuthResult
+        if (pendingResultTask != null) {
+            // There's something already here! Finish the sign-in for your user.
+            pendingResultTask
+                .addOnSuccessListener {
+                    // User is signed in.
+                    // IdP data available in
+                    // authResult.getAdditionalUserInfo().getProfile().
+                    // The OAuth access token can also be retrieved:
+                    // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                    // The OAuth secret can be retrieved by calling:
+                    // ((OAuthCredential)authResult.getCredential()).getSecret().
+                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+
+                }
+                .addOnFailureListener {
+                    // Handle failure.
+                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+
+                }
+        } else {
+            // There's no pending result so you need to start the sign-in flow.
+            // See below.
+            firebaseAuth
+                .startActivityForSignInWithProvider(this, provider.build())
+                .addOnSuccessListener {
+                    // User is signed in.
+                    // IdP data available in
+                    // authResult.getAdditionalUserInfo().getProfile().
+                    // The OAuth access token can also be retrieved:
+                    // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                    // The OAuth secret can be retrieved by calling:
+                    // ((OAuthCredential)authResult.getCredential()).getSecret().
+                    val intent = Intent( this, LoggedInActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }
+                .addOnFailureListener {
+                    // Handle failure.
+                    Toast.makeText(this, "Failed 2", Toast.LENGTH_SHORT).show()
+
+                }
+
+
+        }
+
+
+
+
+
+
+
     }
 
 

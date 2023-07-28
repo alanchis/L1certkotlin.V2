@@ -121,7 +121,7 @@
                 app:layout_constraintStart_toEndOf="@+id/googleBtn"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/fb_path"
+                app:srcCompat="@drawable/yahoo"
                 app:backgroundTint="@color/white"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
